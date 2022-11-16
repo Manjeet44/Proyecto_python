@@ -33,7 +33,11 @@ def iniciar():
 
         elif opcion == '3':
             print("Añadiendo un cliente...\n")
-            dni = helpers.leer_texto(3, 3, "DNI (2 int y 1 char)").upper()
+            dni = None
+            while True:
+                dni = helpers.leer_texto(3, 3, "DNI (2 int y 1 char)").upper()
+                if helpers.dni_valido(dni, db.Clientes.lista):
+                    break
             nombre = helpers.leer_texto(2, 30, "Nombre (2 a 30 chars)").capitalize()
             apellido = helpers.leer_texto(2, 30, "Apellido (2 a 30 chars)").capitalize()
             db.Clientes.crear(dni, nombre, apellido)
